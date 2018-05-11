@@ -1,0 +1,125 @@
+html,
+body {
+	height: 100%;
+	font-family: Ubuntu;
+}
+
+input,
+button,
+textarea {
+	font-family: Ubuntu;
+	background: transparent;
+	border: none;
+	outline: none;
+}
+
+button {
+	padding: 0.4em;
+	border: none;
+	color: #f1f1f1;
+	background-color: #34ace0;
+}
+
+button:hover {
+	background-color: #227093;
+}
+
+body {
+	background-color: #f9f7f5;
+	color: #333;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 2em;
+	flex-wrap: wrap;
+}
+
+.todo-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.todo-add-container {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	border: 1px solid #eee;
+	width: 350px;
+	border-bottom: 0;
+}
+
+.todo-add-container-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.todo-add-container-bottom {
+	display: flex;
+	align-items: center;
+	resize: none;
+	background: transparent;
+	border: none;
+	outline: none;
+}
+
+.todo-list {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	border: 1px solid #eee;
+	width: 350px;
+}
+
+.todo-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	background-color: #fff;
+	padding: 5px 10px;
+}
+
+.todo-item-content .item-title {
+	font-size: 17px;
+	color: #333;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.todo-item-content .item-title span {
+	font-size: 13px;
+	font-weight: normal;
+	margin-left: 10px;
+}
+
+.flex-item.inbox {
+	min-height: 50px;
+}
+
+.todo-edit-delete {
+	font-size: large;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.todo-edit-delete .del-btn {
+	background-color: red;
+}
+
+.title-input {
+	font-size: 22px;
+	width: 100%;
+}
+
+.input-priority {
+	width: 70px;
+}
+
+.an-other-container {
+	margin-left: 0.7em;
+	display: flex;
+	flex-direction: column;
+}
