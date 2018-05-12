@@ -1,37 +1,52 @@
+:root {
+	--bg-color: #f9f7f5;
+	--material-white: #f1f1f1;
+	--font-family: Ubuntu;
+	--material-black: #333;
+	--container-border-color: #eee;
+	--button-hover-bg-color: #2c3e50;
+	--delete-btn--bg-color: #ff793f;
+	--button-bg-color: #1abc9c;
+	--todo-item-color0: #f5cd79;
+	--todo-item-color1: #f6b46b;
+	--todo-item-color2: #f49a64;
+	--todo-item-color3: #ef8063;
+	--todo-item-color4: #f76651;
+	--todo-item-color5: #fb574a;
+}
 html,
 body {
 	height: 100%;
-	font-family: Ubuntu;
-}
-
-input,
-button,
-textarea {
-	font-family: Ubuntu;
-	background: transparent;
-	border: none;
-	outline: none;
-}
-
-button {
-	padding: 0.4em;
-	border: none;
-	color: #f1f1f1;
-	background-color: #34ace0;
-}
-
-button:hover {
-	background-color: #227093;
-}
-
-body {
-	background-color: #f9f7f5;
-	color: #333;
+	color: var(--material-black);
+	font-family: var(--font-family);
+	background-color: var(--bg-color);
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
 	padding-top: 2em;
 	flex-wrap: wrap;
+	line-height: 1.5em;
+}
+
+input,
+button,
+textarea {
+	font-family: inherit;
+	background: transparent;
+	border: none;
+	outline: none;
+	color: inherit;
+}
+
+button {
+	padding: 0.4em;
+	border: none;
+	color: var(--material-white);
+	background-color: var(--button-bg-color);
+}
+
+button:hover {
+	background-color: var(--button-hover-bg-color);
 }
 
 .todo-container {
@@ -44,7 +59,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
-	border: 1px solid #eee;
+	border: 1px solid var(--container-border-color);
 	width: 350px;
 	border-bottom: 0;
 }
@@ -68,7 +83,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
-	border: 1px solid #eee;
+	border: 1px solid var(--container-border-color);
 	width: 350px;
 }
 
@@ -77,13 +92,13 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 10px;
-	background-color: #fff;
-	padding: 5px 10px;
+	background-color: var(--material-white);
+	padding: 15px 10px;
 }
 
 .todo-item-content .item-title {
 	font-size: 17px;
-	color: #333;
+	color: var(--button-hover-bg-color);
 	font-weight: bold;
 	margin-bottom: 5px;
 }
@@ -103,12 +118,29 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
+	min-height: 70px;
+	display: none;
 }
-
+.todo-item:hover .todo-edit-delete {
+	display: flex;
+}
+.todo-edit-content,
+.todo-edit-title {
+	font-size: 17px;
+}
+.todo-edit-title {
+	font-weight: bold;
+}
+.todo-edit-content {
+	resize: none;
+	width: 100%;
+}
 .todo-edit-delete .del-btn {
-	background-color: red;
+	background-color: var(--delete-btn--bg-color);
 }
-
+.todo-edit-delete:hover .del-btn:hover {
+	background-color: var(--button-hover-bg-color);
+}
 .title-input {
 	font-size: 22px;
 	width: 100%;
@@ -122,4 +154,22 @@ body {
 	margin-left: 0.7em;
 	display: flex;
 	flex-direction: column;
+}
+.color0 {
+	background-color: var(--todo-item-color0);
+}
+.color1 {
+	background-color: var(--todo-item-color1);
+}
+.color2 {
+	background-color: var(--todo-item-color2);
+}
+.color3 {
+	background-color: var(--todo-item-color3);
+}
+.color4 {
+	background-color: var(--todo-item-color4);
+}
+.color5 {
+	background-color: var(--todo-item-color5);
 }

@@ -15,13 +15,43 @@ export class App extends React.Component {
 		this.state = {
 			todolist: [
 				{
+					title: '0',
+					priority: 0,
+					date: new Date().toLocaleDateString(),
+					content:
+						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
+				},
+				{
+					title: '1',
 					priority: 1,
 					date: new Date().toLocaleDateString(),
 					content:
 						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
 				},
 				{
-					priority: 0,
+					title: '2',
+					priority: 2,
+					date: new Date().toLocaleDateString(),
+					content:
+						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
+				},
+				{
+					title: '3',
+					priority: 3,
+					date: new Date().toLocaleDateString(),
+					content:
+						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
+				},
+				{
+					title: '4',
+					priority: 4,
+					date: new Date().toLocaleDateString(),
+					content:
+						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
+				},
+				{
+					title: '5',
+					priority: 5,
 					date: new Date().toLocaleDateString(),
 					content:
 						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
@@ -30,6 +60,7 @@ export class App extends React.Component {
 		}
 		this.removeTask = this.removeTask.bind(this)
 		this.addTask = this.addTask.bind(this)
+		this.updateTask = this.updateTask.bind(this)
 	}
 
 	removeTask(index) {
@@ -46,6 +77,13 @@ export class App extends React.Component {
 		this.state.todolist.push(task)
 		this.setState({ todolist: this.state.todolist })
 	}
+	updateTask({ id, title, content }) {
+		console.log('update task....')
+		console.log(`id: ${id}, title: ${title}, content: ${content}`)
+		this.state.todolist[id].title = title
+		this.state.todolist[id].content = content
+		this.setState({ todolist: this.state.todolist })
+	}
 	render() {
 		return (
 			<div className="todo-container">
@@ -59,6 +97,7 @@ export class App extends React.Component {
 									id: i,
 								})}
 								removeTask={this.removeTask}
+								updateTask={this.updateTask}
 							/>
 						)
 					})}
