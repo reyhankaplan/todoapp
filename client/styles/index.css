@@ -37,7 +37,10 @@ textarea {
 	outline: none;
 	color: inherit;
 }
-
+.todo-item input::placeholder,
+.todo-item textarea::placeholder {
+	color: var(--material-white);
+}
 button {
 	padding: 0.4em;
 	border: none;
@@ -95,10 +98,11 @@ button:hover {
 	background-color: var(--material-white);
 	padding: 15px 10px;
 }
-
+.todo-item-content {
+	width: 40%;
+}
 .todo-item-content .item-title {
 	font-size: 17px;
-	color: var(--button-hover-bg-color);
 	font-weight: bold;
 	margin-bottom: 5px;
 }
@@ -114,15 +118,16 @@ button:hover {
 }
 
 .todo-edit-delete {
+	margin-left: 40px;
 	font-size: large;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	min-height: 70px;
-	display: none;
+	visibility: hidden;
 }
 .todo-item:hover .todo-edit-delete {
-	display: flex;
+	visibility: visible;
 }
 .todo-edit-content,
 .todo-edit-title {
