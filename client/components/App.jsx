@@ -35,27 +35,6 @@ export class App extends React.Component {
 					content:
 						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
 				},
-				{
-					title: '3',
-					priority: 3,
-					date: new Date().toLocaleDateString(),
-					content:
-						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
-				},
-				{
-					title: '4',
-					priority: 4,
-					date: new Date().toLocaleDateString(),
-					content:
-						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
-				},
-				{
-					title: '5',
-					priority: 5,
-					date: new Date().toLocaleDateString(),
-					content:
-						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
-				},
 			],
 		}
 		this.removeTask = this.removeTask.bind(this)
@@ -85,6 +64,7 @@ export class App extends React.Component {
 		this.setState({ todolist: this.state.todolist })
 	}
 	render() {
+		this.state.todolist.sort((a, b) => b.priority - a.priority)
 		return (
 			<div className="todo-container">
 				<InBox addTask={this.addTask} />
