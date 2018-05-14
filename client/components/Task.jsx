@@ -3,7 +3,6 @@ import React from 'react'
 export default class Task extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { edit: false }
 	}
 	render() {
 		console.log(JSON.stringify(this.props.task))
@@ -13,36 +12,43 @@ export default class Task extends React.Component {
 					'todo-item' + ` color${this.props.task.priority}`
 				}
 			>
-				<span style={{ padding: '1em' }}>
-					{this.props.task.date}
-				</span>
+				
 				<div className="todo-item-content">
 					<div className="item-title">
-						{this.state.edit ? (
-							<input
-								className="todo-edit-title"
-								type="text"
-								ref={(ref) => {
-									this.title = ref
-								}}
-								placeholder={
+						<div class="title-text">
+							{
+								this.props.task.edit ? (
+									<input
+										className="todo-edit-title"
+										type="text"
+										ref={(ref) => {
+											this.title = ref
+										}}
+										placeholder="What to do..."
+										defaultValue={
+											this.props.task.title
+										}
+									/>
+								) : (
 									this.props.task.title
-								}
-							/>
-						) : (
-							this.props.task.title
-						)}
+								)
+							}
+						</div>
+						<span>
+							{this.props.task.date.toLocaleDateString()}
+						</span>
 					</div>
 					<div className="item-description">
-						{this.state.edit ? (
+						{this.props.task.edit ? (
 							<textarea
 								className="todo-edit-content"
 								ref={(ref) => {
 									this.content = ref
 								}}
-								placeholder={
+								defaultValue={
 									this.props.task.content
 								}
+								placeholder="Content"
 							/>
 						) : (
 							this.props.task.content
@@ -53,48 +59,27 @@ export default class Task extends React.Component {
 					<button
 						className="edit-btn"
 						onClick={() => {
-							if (this.state.edit) {
+							if (this.props.task.edit) {
 								this.props.updateTask({
 									id: this.props.task.id,
-									title:
-										this.title.value ===
-											this
-												.tempTitle ||
-										!this.title.value
-											? this
-													.tempTitle
-											: this.title
-													.value,
-									content:
-										this.content
-											.value ===
-											this
-												.tempContent ||
-										!this.content.value
-											? this
-													.tempContent
-											: this.content
-													.value,
+									title: this.title.value,
+									content: this.content.value,
 								})
 							} else {
 								this.tempTitle = this.props.task.title
 								this.tempContent = this.props.task.content
 							}
-							this.setState({
-								edit: !this.state.edit,
-							})
+							this.props.editEdit(this.props.task.id)
 							console.log('edit')
 						}}
 					>
-						{this.state.edit ? 'Save' : 'Edit'}
+						{this.props.task.edit ? 'Save' : 'Edit'}
 					</button>
 					<button
 						className="del-btn"
 						onClick={() => {
-							if (this.state.edit) {
-								this.setState({
-									edit: !this.state.edit,
-								})
+							if (this.props.task.edit) {
+								this.props.editEdit(this.props.task.id)
 							} else {
 								this.props.removeTask(
 									this.props.task.id
@@ -102,7 +87,7 @@ export default class Task extends React.Component {
 							}
 						}}
 					>
-						{this.state.edit ? 'Cancel' : 'Delete'}
+						{this.props.task.edit ? 'Cancel' : 'Delete'}
 					</button>
 				</div>
 			</div>

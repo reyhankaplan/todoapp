@@ -1,9 +1,13 @@
 import React from 'react'
 
 export default class InBox extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {color: 0}
+	}
 	render() {
 		return (
-			<div className="todo-add-container">
+			<div className="todo-add-container" >
 				<div className="todo-add-container-top">
 					<input
 						className="title-input"
@@ -22,10 +26,18 @@ export default class InBox extends React.Component {
 								type="range"
 								min="0"
 								max="5"
+								defaultValue="0"
 								className="range-slider__range"
+								onChange={
+									() => {
+										this.setState({color: this.priority.value})
+										console.log('color:', this.state.color)
+									}
+								}
 							/>
 						</div>
 						<button
+							className={`color${this.state.color}`}
 							onClick={() => {
 								this.props.addTask({
 									priority: this.priority

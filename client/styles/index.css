@@ -30,12 +30,20 @@ body {
 
 input,
 button,
-textarea {
+textarea,
+select,
+option {
 	font-family: inherit;
 	background: transparent;
 	border: none;
 	outline: none;
 	color: inherit;
+}
+.todo-list-sort-select {
+	font-size: 17px;
+}
+input {
+	width: 100%;
 }
 .todo-item input::placeholder,
 .todo-item textarea::placeholder {
@@ -47,11 +55,9 @@ button {
 	color: var(--material-white);
 	background-color: var(--button-bg-color);
 }
-
 button:hover {
-	background-color: var(--button-hover-bg-color);
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.7);
 }
-
 .todo-container {
 	display: flex;
 	align-items: center;
@@ -97,14 +103,22 @@ button:hover {
 	margin-bottom: 10px;
 	background-color: var(--material-white);
 	padding: 15px 10px;
+	position: relative;
 }
 .todo-item-content {
-	width: 40%;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
 }
 .todo-item-content .item-title {
 	font-size: 17px;
 	font-weight: bold;
 	margin-bottom: 5px;
+}
+
+.item-title {
+	display: flex;
+	justify-content: space-between;
 }
 
 .todo-item-content .item-title span {
@@ -113,12 +127,16 @@ button:hover {
 	margin-left: 10px;
 }
 
-.flex-item.inbox {
-	min-height: 50px;
+.title-text, .item-description {
+	word-break: break-all;
 }
 
 .todo-edit-delete {
-	margin-left: 40px;
+	position: absolute;
+	right: 0;
+	margin: 0;
+	margin-right: -60px;
+	padding-left: 10px;
 	font-size: large;
 	display: flex;
 	flex-direction: column;
@@ -126,9 +144,10 @@ button:hover {
 	min-height: 70px;
 	visibility: hidden;
 }
-.todo-item:hover .todo-edit-delete {
+.todo-item:hover .todo-edit-delete, .todo-edit-delete:hover {
 	visibility: visible;
 }
+
 .todo-edit-content,
 .todo-edit-title {
 	font-size: 17px;
@@ -142,9 +161,6 @@ button:hover {
 }
 .todo-edit-delete .del-btn {
 	background-color: var(--delete-btn--bg-color);
-}
-.todo-edit-delete:hover .del-btn:hover {
-	background-color: var(--button-hover-bg-color);
 }
 .title-input {
 	font-size: 22px;

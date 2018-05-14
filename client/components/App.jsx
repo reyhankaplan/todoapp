@@ -16,30 +16,20 @@ export class App extends React.Component {
 			todolist: [
 				{
 					title: '0',
+					edit: false,
 					priority: 0,
-					date: new Date().toLocaleDateString(),
-					content:
-						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
-				},
-				{
-					title: '1',
-					priority: 1,
-					date: new Date().toLocaleDateString(),
-					content:
-						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
-				},
-				{
-					title: '2',
-					priority: 2,
-					date: new Date().toLocaleDateString(),
+					date: new Date(),
 					content:
 						'Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.',
 				},
 			],
+			sortType: false,
 		}
 		this.removeTask = this.removeTask.bind(this)
 		this.addTask = this.addTask.bind(this)
 		this.updateTask = this.updateTask.bind(this)
+		this.editEdit = this.editEdit.bind(this)
+		this.changeSortType = this.changeSortType.bind(this)
 	}
 
 	removeTask(index) {
@@ -50,7 +40,7 @@ export class App extends React.Component {
 	}
 
 	addTask(task) {
-		task.date = new Date().toLocaleDateString()
+		task.date = new Date()
 		console.log('add task ....')
 		console.log(JSON.stringify(task))
 		this.state.todolist.push(task)
@@ -61,26 +51,58 @@ export class App extends React.Component {
 		console.log(`id: ${id}, title: ${title}, content: ${content}`)
 		this.state.todolist[id].title = title
 		this.state.todolist[id].content = content
-		this.setState({ todolist: this.state.todolist })
+		this.setState({ todolist: this.state.todolist, sortType: false })
 	}
+	editEdit(index) {
+		this.state.todolist[index].edit = !this.state.todolist[index].edit
+		this.setState({todolist: this.state.todolist})
+	}
+	changeSortType(e) {
+		this.setState({sortType: !!parseInt(e.target.value)})
+	}
+
 	render() {
-		this.state.todolist.sort((a, b) => b.priority - a.priority)
+		
 		return (
 			<div className="todo-container">
 				<InBox addTask={this.addTask} />
+				<div className="todo-sorting-options">
+					<select 
+						className="todo-list-sort-select"
+						ref= {
+								(ref) => {
+									this.sortType = ref
+								}
+							}
+						onChange= {this.changeSortType}
+					>
+						<option value={0}>Date</option>
+						<option value={1}>Priority</option>
+					</select>
+				</div>
 				<div className="todo-list">
-					{this.state.todolist.map((e, i) => {
-						console.log(`${JSON.stringify(e)}`)
-						return (
-							<Task
-								task={Object.assign({}, e, {
-									id: i,
-								})}
-								removeTask={this.removeTask}
-								updateTask={this.updateTask}
-							/>
+					{
+						this.state.todolist
+						.sort(
+							(a, b) => 
+								(this.state.sortType ? 
+									b.priority - a.priority :
+									b.date - a.date)
 						)
-					})}
+						.map((e, i) => {
+							console.log(`${JSON.stringify(e)}`)
+							return (
+								<Task
+									task={Object.assign({}, e, {
+										id: i,
+									})}
+									removeTask={this.removeTask}
+									updateTask={this.updateTask}
+									editEdit={this.editEdit}
+								/>
+							)
+						})
+					}
 				</div>
 			</div>
 		)
