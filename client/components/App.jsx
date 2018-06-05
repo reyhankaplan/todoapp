@@ -1,7 +1,6 @@
 import React from 'react'
 import Task from './Task.jsx'
 import InBox from './InBox.jsx'
-import db from '../data/db.js'
 import websqlite from 'websqlite'
 /**
  * task = {
@@ -22,6 +21,10 @@ export class App extends React.Component {
 			dbObject: window,
 			timeout: 5000
 		})
+
+		this.SqlService.query(
+			'create table if not exists todo (id unique, title, content, date, priority)'
+		)
 
 		this.sortType = false
 
