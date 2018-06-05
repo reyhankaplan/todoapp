@@ -151,28 +151,6 @@ export class App extends React.Component {
 								/>
 							)
 						})
-					
-					/*	this.state.todolist
-						.sort(
-							(a, b) => 
-								(this.state.sortType ? 
-									b.priority - a.priority :
-									b.date - a.date)
-						)
-						.map((e, i) => {
-							console.log(`${JSON.stringify(e)}`)
-							return (
-								<Task
-									task={Object.assign({}, e, {
-										id: i,
-									})}
-									removeTask={this.removeTask}
-									updateTask={this.updateTask}
-									editEdit={this.editEdit}
-								/>
-							)
-						})*/
-						
 					}
 				</div>
 			</div>
