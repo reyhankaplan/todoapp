@@ -3,7 +3,7 @@ import React from 'react'
 export default class Task extends React.Component {
 	constructor(props) {
 		super(props)
-		this.edit = false
+		this.state ={ edit: false }
 	}
 	render() {
 		console.log(JSON.stringify(this.props.task))
@@ -18,7 +18,7 @@ export default class Task extends React.Component {
 					<div className="item-title">
 						<div class="title-text">
 							{
-								this.edit ? (
+								this.state.edit ? (
 									<input
 										className="todo-edit-title"
 										type="text"
@@ -40,7 +40,7 @@ export default class Task extends React.Component {
 						</span>
 					</div>
 					<div className="item-description">
-						{ this.edit ? (
+						{ this.state.edit ? (
 							<textarea
 								className="todo-edit-content"
 								ref={(ref) => {
@@ -60,7 +60,7 @@ export default class Task extends React.Component {
 					<button
 						className="edit-btn"
 						onClick={() => {
-							if (this.edit) {
+							if (this.state.edit) {
 								this.props.updateTask({
 									id: this.props.task.id,
 									title: this.title.value,
@@ -70,20 +70,18 @@ export default class Task extends React.Component {
 								this.tempTitle = this.props.task.title
 								this.tempContent = this.props.task.content
 							}
-							this.edit = !this.edit
-							this.props.updateEditItemCount(this.edit)
+							this.setState({edit:!this.state.edit})
 
 							console.log('edit')
 						}}
 					>
-						{this.edit ? 'Save' : 'Edit'}
+						{this.state.edit ? 'Save' : 'Edit'}
 					</button>
 					<button
 						className="del-btn"
 						onClick={() => {
-							if (this.edit) {
-								this.edit = !this.edit
-								this.props.updateEditItemCount(this.edit)
+							if (this.state.edit) {
+								this.setState({edit:!this.state.edit})
 							} else {
 								this.props.removeTask(
 									this.props.task.id
@@ -91,7 +89,7 @@ export default class Task extends React.Component {
 							}
 						}}
 					>
-						{this.edit ? 'Cancel' : 'Delete'}
+						{this.state.edit ? 'Cancel' : 'Delete'}
 					</button>
 				</div>
 			</div>

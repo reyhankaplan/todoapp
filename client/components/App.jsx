@@ -26,8 +26,7 @@ export class App extends React.Component {
 		this.sortType = false
 
 		this.state = {
-			todolist: [],
-			editItemCount: 0
+			todolist: []
 		}
 		// Select todos
 		// table_name, column_names, where, values, order
@@ -46,7 +45,6 @@ export class App extends React.Component {
 		this.updateTask = this.updateTask.bind(this)
 		this.changeSortType = this.changeSortType.bind(this)
 		this.updateTodolist = this.updateTodolist.bind(this)
-		this.countEditModeItems = this.countEditModeItems.bind(this)
 	}
 
 	updateTodolist() {
@@ -58,7 +56,7 @@ export class App extends React.Component {
 			'*',
 			'',
 			'',
-			`${this.sortType?'priority, date':'date'} desc`
+			(this.sortType?'priority desc, ':'')+'date desc'
 		).then(res => {
 			this.setState({todolist: res})
 		})
@@ -103,16 +101,6 @@ export class App extends React.Component {
 		this.updateTodolist()
 	}
 
-	countEditModeItems(edit) {
-		this.setState(
-			{
-				editItemCount: edit ? 
-					++this.state.editItemCount :
-					--this.state.editItemCount
-			}
-		)
-	}
-
 	changeSortType(e) {
 		this.sortType = !!parseInt(e.target.value)
 		this.updateTodolist()
@@ -147,7 +135,6 @@ export class App extends React.Component {
 									task={e}
 									removeTask={this.removeTask}
 									updateTask={this.updateTask}
-									updateEditItemCount={this.countEditModeItems}
 								/>
 							)
 						})
